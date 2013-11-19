@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div class="row-fluid">
+	<div class="span6 offset3">
+		<h1>Login</h1>
+
+		<form action="/dmz/login" method="post">
+			<input data-ng-model="user.username" type="text" placeholder="Name" name="username"><br />
+			<input data-ng-model="user.password" type="text" placeholder="Password" name="password"><br />
+			<a href="#/register">Register</a>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+	</div>
+</div>
+
+</body>
+</html>
