@@ -1,21 +1,14 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<div class="row-fluid">
-	<div class="span6 offset3">
-		<h1>Login</h1>
-
-		<form action="/dmz/login" method="post">
-			<input data-ng-model="user.username" type="text" placeholder="Name" name="username"><br />
-			<input data-ng-model="user.password" type="text" placeholder="Password" name="password"><br />
-			<a href="#/register">Register</a>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-
-	</div>
-</div>
-
-</body>
-</html>
+<div ng-show="security.isLoginShown"><form ng-submit="security.login(user.username, user.password)">
+    <div>
+    <label>Username:</label>
+    <input type="text" name="username" ng-model="user.username" required/><br/>
+    </div>
+    <div>
+    <label>Password:</label>
+    <input type="password" name="password" ng-model="user.password" required/>
+    </div>
+    <div>
+    <input type="submit" value="Log in"/>
+    </div>
+</form>
+<p><small>Hint - bob:secret</small></p></div>

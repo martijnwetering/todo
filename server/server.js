@@ -8,7 +8,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
     pass = require('./config/pass.js'),
-    userCtrl = require('./app/controllers/userCtrl.js');
+    userCtrl = require('./app/controllers/userCtrl.js'),
+    basic_routes = require('./config/basic.js');
 
 /**
  * Main application entry file.
@@ -65,7 +66,7 @@ app.all('/secure', pass.ensureAuthenticated);
 //app.all('/secure/admin', pass.ensureAdmin);
 
 // Basic pages
-//app.get('/', basic_routes.index);
+app.get('/', basic_routes.index);
 
 // Login pages
 app.get('/dmz/login', userCtrl.getlogin);
