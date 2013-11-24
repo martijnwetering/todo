@@ -26,15 +26,36 @@ exports.signup = function (req, res) {
         body.password2,
         false,
         function (err, user) {
-            if (err) return console.log(err);
-              //res.render('signup', {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
+            if (err) if (err) {
+              return res.json(401, {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
+            }
             req.login(user, function (err) {
                 if (err) return next(err);
                 // successful login
-                res.redirect('/secure/account');
+                res.json(200, {user: user});
             })
         })
 }
+
+/*
+exports.signup = function (req, res) {
+    var body = req.body;
+    pass.createUser(
+        body.username,
+        body.email,
+        body.password,
+        body.password2,
+        false,
+        function (err, user) {
+            if (err) return res.json(401, {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
+            req.login(user, function (err) {
+                if (err) return next(err);
+                // successful login
+                res.json(200, {user: user});
+            })
+        });
+}
+*/
 
 
 // POST /login
@@ -57,18 +78,14 @@ app.post('/dmz/login',
 //   This is an alternative implementation that uses a custom callback to
 //   acheive the same functionality.
 exports.postlogin = function(req, res, next) {
-  console.log('postLogin function accessed');
-  console.log(req.body);
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err) }
     if (!user) {
-      req.session.messages =  [info.message];
-      console.log('No user');
-      return res.redirect('/#/login')
+      return res.json(403, {message: info.message});
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('/secure/account');
+      return res.json({user: user});
     });
   })(req, res, next);
 };
@@ -77,3 +94,4 @@ exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
+

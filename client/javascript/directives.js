@@ -40,7 +40,7 @@ directives.directive("signup", function () {
         },
         link: function (scope) {
             scope.$watch("user.password", function (value) {
-                scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
+                //scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
             })
         }
     }

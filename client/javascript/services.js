@@ -1,7 +1,6 @@
 var services = angular.module('myApp.services', ['ngResource'])
 
-// Al put, post, update and delete request get done true this factory
-services.factory('User', ['$resource', '$http',
+services.factory('Login', ['$resource', '$http',
         function ($resource) {
             var actions = {
                     'get': {method: 'GET'},
@@ -11,12 +10,25 @@ services.factory('User', ['$resource', '$http',
                     'delete': {method: 'DELETE'},
                     'update': {method: 'PUT'}
                 }; 
-            console.log('User service accessed');
             return $resource('/dmz/login', {}, actions);
         }      
     ])
 
-services.factory('Security', ['$location', function ($location) {
+services.factory('Signup', ['$resource', '$http',
+        function ($resource) {
+            var actions = {
+                    'get': {method: 'GET'},
+                    'save': {method: 'POST'},
+                    'query': {method: 'GET', isArray: true},
+                    'remove': {method: 'DELETE'},
+                    'delete': {method: 'DELETE'},
+                    'update': {method: 'PUT'}
+                }; 
+            return $resource('/dmz/signup', {}, actions);
+        }      
+    ])
+
+services.factory('Security', ['$location', 'Login', 'Signup', function ($location, Login, Signup) {
             return {
                 showLogin: function () {
                     this.isSignupShown = false;
@@ -29,22 +41,57 @@ services.factory('Security', ['$location', function ($location) {
                 },
                 isSignupShown: false,
                 login: function (username, password) {
-                    this.currentUser = {username: username, email: username+"@example.com" };
-                    this.isLoginShown = false;
+                    var that = this;
+                    Login.save({}, {username: username, password: password}, function (res) {
+                        that.currentUser = res.user;
+                        if (that.isAuthenticated()) {
+                            that.isLoginShown = false;
+                        }
+                    });
                 },
                 signup: function (username, email, password1, password2) {
-                    this.currentUser = {username: username, email: email};
-                    this.isSignupShown = false;
+                    var that = this;
+                    Signup.save({}, {username: username, password: password1, password2: password2, email: email}, function (res) {
+                        that.currentUser = res.user;
+                        if (that.isAuthenticated()) {
+                            that.isSignupShown = false;
+                        }
+                    });
                 },
                 logout: function () {
                     delete this.currentUser;
                 },
                 isAuthenticated: function () {
                     return !!this.currentUser;
-                }
+                },
             };
         }
     ]);
+
+/*
+signup: function (username, email, password1, password2) {
+    var request = $http.post('/dmz/signup', {username: username, password: password1, password2: password2, email: email});
+    return request.then(function (response) {
+        security.currentUser = response.data.user;
+        if (security.isAuthenticated()) {
+            security.isSignupShown = false;
+        }
+    });
+}
+*/
+
+
+/*
+login: function (username, password) {
+    var request = $http.post('/dmz/login', {username: username, password: password});
+    return request.then(function (response) {
+        security.currentUser = response.data.user;
+        if (security.isAuthenticated()) {
+            security.isLoginShown = false;
+        }
+    });
+},
+*/
 
 
 
