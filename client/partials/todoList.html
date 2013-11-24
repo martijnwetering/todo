@@ -1,0 +1,18 @@
+<div class="row-fluid">
+	<div class="span6 offset3">
+		<h1>{{security.currentUser.username}}</h1>
+		<!-- Databinding with object todos from database -->
+		<h4>Todo's left: {{todos.doc.length}}</h4>
+		<br />
+		<form class="input-append">
+			<input data-ng-model="todo.content" type="text">
+			<button type="submit" data-ng-click="newTodo()" class="btn btn-primary">Add</button>
+		</form><br />
+		<table class="table table-striped">
+			<tr data-ng-repeat="todo in todos.doc | orderBy:'action' ">
+				<td><a href="#" data-ng-click="delete()"><i class="icon-remove"></i></a></td>
+				<td><a href="#" class="done-{{todo.done}}" data-ng-click="update()">{{todo.content}}</a</td>
+			</tr>
+		</table>
+	</div>
+</div>

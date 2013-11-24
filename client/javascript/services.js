@@ -28,6 +28,34 @@ services.factory('Signup', ['$resource', '$http',
         }      
     ])
 
+services.factory('Todo', ['$resource', '$http',
+        function ($resource) {
+            var actions = {
+                    'get': {method: 'GET'},
+                    'save': {method: 'POST'},
+                    'query': {method: 'GET', isArray: true},
+                    'remove': {method: 'DELETE'},
+                    'delete': {method: 'DELETE'},
+                    'update': {method: 'PUT'}
+                }; 
+            return $resource('/v1/todolist', {}, actions);
+        }      
+    ])
+
+services.factory('TodoList', ['$resource', '$http', 'Security',
+        function ($resource) {
+            var actions = {
+                    'get': {method: 'GET'},
+                    'save': {method: 'POST'},
+                    'query': {method: 'GET', isArray: true},
+                    'remove': {method: 'DELETE'},
+                    'delete': {method: 'DELETE'},
+                    'update': {method: 'PUT'}
+                }; 
+            return $resource('/v1/todolist', {}, actions);
+        }      
+    ])
+
 services.factory('Security', ['$location', 'Login', 'Signup', function ($location, Login, Signup) {
             return {
                 showLogin: function () {
@@ -46,6 +74,7 @@ services.factory('Security', ['$location', 'Login', 'Signup', function ($locatio
                         that.currentUser = res.user;
                         if (that.isAuthenticated()) {
                             that.isLoginShown = false;
+                            $location.path('/todo');
                         }
                     });
                 },

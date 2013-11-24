@@ -9,7 +9,8 @@ var express = require('express'),
     path = require('path'),
     pass = require('./config/pass.js'),
     userCtrl = require('./app/controllers/userCtrl.js'),
-    basic_routes = require('./config/basic.js');
+    basic_routes = require('./config/basic.js'),
+    todoCtrl = require('./app/controllers/todoCtrl.js');
 
 /**
  * Main application entry file.
@@ -78,6 +79,10 @@ app.post('/dmz/signup', userCtrl.signup);
 
 // secure pages
 app.get('/secure/account', userCtrl.account);
+
+// New todo
+app.post('/v1/todolist', todoCtrl.newTodo);
+app.get('/v1/todolist', todoCtrl.listTodo);
 
 //admin pages
 //app.get('/secure/admin', user_routes.admin);

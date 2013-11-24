@@ -11,6 +11,10 @@ var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myA
             templateUrl: 'partials/account.html',
             controller: 'mainCtrl'
         })
+        .when('/todo', {
+            templateUrl: 'partials/todoList.html',
+            controller: 'todoCtrl'
+        })
         .otherwise({redirectTo: '/'});
 
     }]
