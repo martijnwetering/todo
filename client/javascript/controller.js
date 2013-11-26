@@ -22,7 +22,7 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $coo
 
 		getTodo = function () {
 			var userId = Security.currentUser.email;
-			$scope.todos = TodoList.get({userId: userId});
+			$scope.todos = TodoList.get();
 		}
 		getTodo();
 
