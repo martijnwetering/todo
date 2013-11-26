@@ -15,7 +15,11 @@
     "path": "*",
     "node-uuid": "*",
     "passport": "*",
-    "path": "*"
+    "passport-local": "*",
+    "path": "*",
+    "fs": "*",
+    "zxcvbn": "*",
+    "ejs": "*"
     },
   "repository": "",
   "author": "Martijn",
