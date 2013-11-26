@@ -1,8 +1,8 @@
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy
-  , mongoose = require('mongoose')
-  , db = require('../app/models/user.js')
-  , userModel = mongoose.model('User');
+var passport =          require('passport')
+    , LocalStrategy =   require('passport-local').Strategy
+    , mongoose =        require('mongoose')
+    , db =              require('../app/models/user.js')
+    , userModel =       mongoose.model('User');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

@@ -1,12 +1,12 @@
-var mongoose = require('mongoose'),
-	bcrypt = require('bcrypt'),
-	zxcvbn = require("zxcvbn"),
-	passport = require('passport');
-	SALT_WORK_FACTOR = 10,
-	exports.mongoose = mongoose;
+var  mongoose =    require('mongoose')
+	   , bcrypt =    require('bcrypt')
+	   , zxcvbn =    require("zxcvbn")
+	   , passport =  require('passport');
+
+	   SALT_WORK_FACTOR = 10,
+	   exports.mongoose = mongoose;
 
 
-//******* Database schema TODO add more validation
 var Schema = mongoose.Schema;
 
 // User schema
@@ -46,7 +46,6 @@ exports.createUser = function(username, emailaddress, password1, password2, adm,
     });
  
 };
-
 
 // Bcrypt middleware
 userSchema.pre('save', function(next) {

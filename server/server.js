@@ -1,21 +1,12 @@
-/**
- * Module dependencies.
- */
-var express = require('express'),
-    fs = require('fs'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    mongoose = require('mongoose'),
-    path = require('path'),
-    pass = require('./config/pass.js'),
-    userCtrl = require('./app/controllers/userCtrl.js'),
-    basic_routes = require('./config/basic.js'),
-    todoCtrl = require('./app/controllers/todoCtrl.js');
-
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
+var express =           require('express')
+    , fs =              require('fs')
+    , passport =        require('passport')
+    , LocalStrategy =   require('passport-local').Strategy
+    , mongoose =        require('mongoose')
+    , path =            require('path')
+    , pass =            require('./config/pass.js')
+    , userCtrl =        require('./app/controllers/userCtrl.js')
+    , todoCtrl =        require('./app/controllers/todoCtrl.js');
 
 //Load configurations
 //if test env, load example file
