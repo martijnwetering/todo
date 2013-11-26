@@ -35,6 +35,11 @@ exports.signup = function (req, res) {
                 res.json(200, {user: user});
             })
         })
+};
+
+exports.logout = function (req, res) {
+  req.logout();
+  res.send(200);
 }
 
 /*

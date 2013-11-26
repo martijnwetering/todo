@@ -62,30 +62,36 @@ app.use(passport.session());
 //Bootstrap routes
 require('./config/routes')(app);
 
-// set up our security to be enforced on all requests to secure paths
-app.all('/secure', pass.ensureAuthenticated);
-//app.all('/secure/admin', pass.ensureAdmin);
+// Login 
+app.post('/api/v1/login', userCtrl.postlogin);
 
-// Basic pages
-app.get('/', basic_routes.index);
+// Signup 
+app.post('/api/v1/signup', userCtrl.signup);
 
-// Login pages
-app.get('/dmz/login', userCtrl.getlogin);
-app.post('/dmz/login', userCtrl.postlogin);
-app.get('/dmz/logout', userCtrl.logout);
-
-// Signup pages
-app.post('/dmz/signup', userCtrl.signup);
-
-// secure pages
-app.get('/secure/account', userCtrl.account);
-
-// New todo
+// Todo
 app.post('/v1/todolist', todoCtrl.newTodo);
 app.get('/v1/todolist', todoCtrl.listTodo);
 
-//admin pages
-//app.get('/secure/admin', user_routes.admin);
+// Logout
+app.post('/logout', userCtrl.logout);
+
+app.get('/*', function (req, res) {
+    console.log('all accessed');
+    var username = '';
+    var email = '';
+
+    if (req.user) {
+        username = req.user.username,
+        email = req.user.email
+    }
+
+    res.cookie('user', JSON.stringify({
+        'username': username,
+        'email': email
+    }));
+
+    res.render('index-ang');
+}); 
 
 //Start the app by listening on <port>
 var port = process.env.PORT || 3000;
