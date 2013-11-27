@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "async": "*",
+    "bcrypt": "*",
+    "path": "*",
+    "node-uuid": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "fs": "*",
+    "zxcvbn": "*",
+    "ejs": "*"
+  },
+  "repository": "",
+  "author": "Martijn",
+  "license": "BSD",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
+}
