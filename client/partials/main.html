@@ -1,5 +1,9 @@
 <login-toolbar></login-toolbar>
 <login></login>
 <signup></signup>
-<h2 ng-show="!security.isAuthenticated()">Welcome. Please log in.</h2>
-<h2 ng-show="security.isAuthenticated()">Hello {{security.currentUser.username}}</h2>
+<div class="row-fluid">
+	<div class="span6 offset3">
+		<h2 ng-show="!security.isAuthenticated()">Welcome. Please log in.</h2>
+		<h2 ng-show="security.isAuthenticated()">Hello {{security.currentUser.username}}</h2>
+	</div>
+</div>

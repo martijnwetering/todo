@@ -1,7 +1,11 @@
-<ul>
-    <li><a href="/">Home</a></li>
-    <li ng-show="security.isAuthenticated()"><a href="/#/account">Account</a></li>
-    <li><a ng-click="security.showLogin()">Log In</a></li>
-    <li><a ng-click="security.showSignup()">Sign up</a></li>
-    <li ng-show="security.isAuthenticated()"><a ng-click="security.logout()">Log out</a></li>
-</ul>
+<div class="row-fluid">
+	<div class="span6 offset3">
+		<ul>
+		    <li><a href="/">Home</a></li>
+		    <!-- <li ng-show="security.isAuthenticated()"><a href="/#/account">Account</a></li> -->
+		    <li><a ng-click="security.showLogin()">Log In</a></li>
+		    <li><a ng-click="security.showSignup()">Sign up</a></li>
+		    <li ng-show="security.isLogoutShown"><a ng-click="security.logout()">Log out</a></li>
+		</ul>
+	</div>
+</div>

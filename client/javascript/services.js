@@ -51,6 +51,7 @@ services.factory('Security', function ($location, $cookieStore, $http) {
                     $http.post('/api/v1/login', {username: username, password: password}).success(function (data) {
                         that.currentUser = data.user;
                         that.isLoginShown = false;
+                        that.isLogoutShown = true;
                         $location.path('/todo');
                     });
                 },
@@ -59,12 +60,17 @@ services.factory('Security', function ($location, $cookieStore, $http) {
                     $http.post('/api/v1/signup', {username: username, password: password1, password2: password2, email: email}).success(function (data) {
                         that.currentUser = data.user;
                         that.isSignupShown = false;
+                        that.isLogoutShown = true;
                         $location.path('/todo');
                     });
                 },
+                isLogoutShown: false,
                 logout: function () {
+                    var that = this;
                     $http.post('/logout').success(function () {
-                        console.log('logged out');
+                        that.isLogoutShown = false;
+                        that.currentUser = {};
+                        $location.path('/');
                     })
                 },
                 isAuthenticated: function () {

@@ -1,16 +1,14 @@
 var controllers = angular.module('myApp.controllers', ['myApp.services', 'ngCookies']);
 
-controllers.controller('mainCtrl', function ($scope, $location, $cookies, Security) {
+controllers.controller('mainCtrl', function ($scope, $location, Security) {
 
 		$scope.security = Security;
-		console.log('mainCtrl cookie: ' ,$cookies);
 	}
 );
 
-controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $cookies, $cookieStore, Security, Todo, TodoList) {
+controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $cookieStore, Security, Todo, TodoList) {
 		$scope.security = Security;
 		//Security.currentUser = $cookieStore.get('user');
-		console.log('todoCtrl cookie: ', $cookies);
 
 		$scope.newTodo = function () {
 			$scope.todo.userId = Security.currentUser.email;
