@@ -14,13 +14,12 @@ exports.newTodo = function (req, res) {
         };
         return res.send(retObj);
     });
-}
+};
 
 exports.listTodo = function (req, res) {
     var conditions, fields, options, id;
 
     id = {userId: req.user.email};
-    console.log(req.user.email)
     conditions = {};
     fields = {};
     options = {};
@@ -34,5 +33,5 @@ exports.listTodo = function (req, res) {
                 err: err
             };
             return res.send(retObj);
-        })
-}
+        });
+};

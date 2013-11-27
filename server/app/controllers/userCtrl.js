@@ -16,14 +16,14 @@ exports.signup = function (req, res) {
                 if (err) return next(err);
                 // successful login
                 res.json(200, {user: user});
-            })
-        })
+            });
+        });
 };
 
 exports.logout = function (req, res) {
   req.logout();
   res.send(200);
-}
+};
 
 // POST /login
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -45,7 +45,7 @@ app.post('/dmz/login',
 //   acheive the same functionality.
 exports.postlogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err) }
+    if (err) { return next(err); }
     if (!user) {
       return res.json(403, {message: info.message});
     }

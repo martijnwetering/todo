@@ -16,12 +16,12 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $coo
 				getTodo();
 			});
 			$scope.todo.content = '';
-		}
+		};
 
 		getTodo = function () {
 			var userId = Security.currentUser.email;
 			$scope.todos = TodoList.get();
-		}
+		};
 		getTodo();
 
 	}

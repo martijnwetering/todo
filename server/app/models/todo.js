@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 
 var todoSchema = new mongoose.Schema({
 	userId: {type: String},
- 	content: {type: String},
- 	done: {type: Boolean}
+	content: {type: String},
+	done: {type: Boolean}
 });
 
 var modelName = "Todo";

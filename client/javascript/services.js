@@ -1,4 +1,4 @@
-var services = angular.module('myApp.services', ['ngResource', 'ngCookies'])
+var services = angular.module('myApp.services', ['ngResource', 'ngCookies']);
 
 services.factory('Todo', ['$resource', '$http',
         function ($resource) {
@@ -12,7 +12,7 @@ services.factory('Todo', ['$resource', '$http',
                 }; 
             return $resource('/v1/todolist', {}, actions);
         }      
-    ])
+    ]);
 
 services.factory('TodoList', ['$resource', '$http', 'Security',
         function ($resource) {
@@ -26,7 +26,7 @@ services.factory('TodoList', ['$resource', '$http', 'Security',
                 }; 
             return $resource('/v1/todolist', {}, actions);
         }      
-    ])
+    ]);
 
 services.factory('Security', function ($location, $cookieStore, $http) {
             
@@ -71,7 +71,7 @@ services.factory('Security', function ($location, $cookieStore, $http) {
                         that.isLogoutShown = false;
                         that.currentUser = {};
                         $location.path('/');
-                    })
+                    });
                 },
                 isAuthenticated: function () {
                     return !!this.currentUser;

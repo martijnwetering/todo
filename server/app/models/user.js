@@ -1,10 +1,9 @@
-var  mongoose =    require('mongoose')
-	   , bcrypt =    require('bcrypt')
-	   , zxcvbn =    require("zxcvbn")
-	   , passport =  require('passport');
+var mongoose =      require('mongoose')
+    , bcrypt =      require('bcrypt')
+    , zxcvbn =      require("zxcvbn")
+    , passport =    require('passport');
 
-	   SALT_WORK_FACTOR = 10,
-	   exports.mongoose = mongoose;
+    SALT_WORK_FACTOR = 10;
 
 
 var Schema = mongoose.Schema;
@@ -18,7 +17,7 @@ var userSchema = new Schema({
 });
 
 
-const MIN_PASSWORD_SCORE = 2;
+var MIN_PASSWORD_SCORE = 2;
  
 // snip
  
@@ -40,8 +39,8 @@ exports.createUser = function(username, emailaddress, password1, password2, adm,
         if(err) {
             done(err);
         } else {
-        	console.log('User saved');
-            done(null, user);
+          console.log('User saved');
+          done(null, user);
         }
     });
  
