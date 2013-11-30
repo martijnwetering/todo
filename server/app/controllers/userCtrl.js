@@ -47,7 +47,7 @@ exports.postlogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) {
-      return res.json(403, {message: info.message});
+      return res.json(401, {message: info.message});
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }

@@ -1,5 +1,9 @@
 var services = angular.module('myApp.services', ['ngResource', 'ngCookies']);
 
+services.config(function ($httpProvider) {
+    $httpProvider.responseInterceptors.push('errorHttpInterceptor');
+});
+
 services.factory('Todo', ['$resource', '$http',
         function ($resource) {
             var actions = {
@@ -74,11 +78,41 @@ services.factory('Security', function ($location, $cookieStore, $http) {
                     });
                 },
                 isAuthenticated: function () {
-                    return !!this.currentUser;
+                    return !!this.currentUser.username;
                 },
             };
         }
     );
+
+services.factory('ErrorService', function() {
+    return {
+        errorMessage: null,
+        setError: function (msg) {
+            this.errorMessage = msg;
+        },
+        clear: function() {
+            this.errorMessage = null;
+        }
+    };
+});
+
+services.factory('errorHttpInterceptor', function ($q, $location, ErrorService, $rootScope) {
+    console.log('errorHttpInterceptor accessed');
+    return function (promise) {
+        return promise.then(function (response) {
+            return response;
+        }, function (response) {
+            if (response.status === 401) {
+                console.log('broadcast');
+                $rootScope.$broadcast('event:LoginRequired');
+            } else if (response.status >= 400 && response.status < 500) {
+                ErrorService.setError('Server was unable to find' +
+                    ' what u were looking for... Sorry!!');
+            } 
+            return $q.reject(response);
+        });
+    };
+});
 
 
 

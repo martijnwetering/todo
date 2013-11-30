@@ -1,18 +1,16 @@
-<div class="row-fluid">
-    <div class="span6 offset3"  ng-show="security.isLoginShown">
-        <form ng-submit="security.login(user.username, user.password)">
-            <div>
-            <label>Username:</label>
-            <input type="text" name="username" ng-model="user.username" required/><br/>
-            </div>
-            <div>
-            <label>Password:</label>
-            <input type="password" name="password" ng-model="user.password" required/>
-            </div>
-            <div>
-            <input type="submit" value="Log in"/>
-            </div>
-        </form>
-        <p><small>Hint - correcthorsebatterystaple</small></p>
-    </div>
+<div data-ng-show="security.isLoginShown">
+    <form data-ng-submit="security.login(user.username, user.password)">
+        <div>
+        <label>Username:</label>
+        <input type="text" name="username" ng-model="user.username" required/><br/>
+        </div>
+        <div>
+        <label>Password:</label>
+        <input type="password" name="password" ng-model="user.password" required/>
+        </div>
+        <div>
+        <input type="submit" value="Log in"/>
+        </div>
+    </form>
+    <p><small>Hint - correcthorsebatterystaple</small></p>
 </div>

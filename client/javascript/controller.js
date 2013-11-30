@@ -3,6 +3,11 @@ var controllers = angular.module('myApp.controllers', ['myApp.services', 'ngCook
 controllers.controller('mainCtrl', function ($scope, $location, Security) {
 
 		$scope.security = Security;
+
+		$scope.$on('event:LoginRequired', function() {
+			alert('Wrong username/password');
+			$location.path('/');
+		});
 	}
 );
 
