@@ -35,3 +35,7 @@ exports.listTodo = function (req, res) {
             return res.send(retObj);
         });
 };
+
+exports.deleteTodo = function (req, res) {
+    
+};

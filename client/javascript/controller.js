@@ -1,8 +1,9 @@
 var controllers = angular.module('myApp.controllers', ['myApp.services', 'ngCookies']);
 
-controllers.controller('mainCtrl', function ($scope, $location, Security) {
+controllers.controller('mainCtrl', function ($scope, $location, Security, ErrorService) {
 
 		$scope.security = Security;
+		$scope.errorService = ErrorService;
 
 		$scope.$on('event:LoginRequired', function() {
 			alert('Wrong username/password');
@@ -11,9 +12,10 @@ controllers.controller('mainCtrl', function ($scope, $location, Security) {
 	}
 );
 
-controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $cookieStore, Security, Todo, TodoList) {
+controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $cookieStore, Security, Todo, TodoList, ErrorService) {
+		
 		$scope.security = Security;
-		//Security.currentUser = $cookieStore.get('user');
+		$scope.errorService = ErrorService;
 
 		$scope.newTodo = function () {
 			$scope.todo.userId = Security.currentUser.email;
@@ -22,6 +24,13 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $coo
 			});
 			$scope.todo.content = '';
 		};
+
+		$scope.delete = function(){
+        	var id = this.todo._id;
+        	TodoList.delete({ id:id }, function (res) {
+            	$scope.err = JSON.stringify(res.err);
+        	});
+    	} 
 
 		getTodo = function () {
 			var userId = Security.currentUser.email;

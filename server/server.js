@@ -4,14 +4,14 @@ var express =           require('express')
     , LocalStrategy =   require('passport-local').Strategy
     , mongoose =        require('mongoose')
     , path =            require('path')
-    , pass =            require('./server/config/pass.js')
-    , userCtrl =        require('./server/app/controllers/userCtrl.js')
-    , todoCtrl =        require('./server/app/controllers/todoCtrl.js');
+    , pass =            require('./config/pass.js')
+    , userCtrl =        require('./app/controllers/userCtrl.js')
+    , todoCtrl =        require('./app/controllers/todoCtrl.js');
 
 //Load configurations
 //if test env, load example file
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./server/config/config')[env];
+    config = require('./config/config')[env];
 
 //Bootstrap db connection
 var db = mongoose.connect(config.db, function (err, res) {
@@ -23,7 +23,7 @@ var db = mongoose.connect(config.db, function (err, res) {
 });
 
 //Bootstrap models
-var models_path = __dirname + '/server/app/models';
+var models_path = __dirname + '/app/models';
 var walk = function(path) {
     fs.readdirSync(path).forEach(function(file) {
         var newPath = path + '/' + file;
@@ -40,10 +40,10 @@ var walk = function(path) {
 walk(models_path);
 
 var app = express();
-app.set('views', __dirname + '/server/app/views');
+app.set('views', __dirname + '/app/views');
 app.set('view engine', 'ejs');
 app.use(express.logger('dev'));
-app.use(express.static(path.join(__dirname, '/client')));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.session({ secret: 'keyboard cat' }));
@@ -51,7 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Bootstrap routes
-require('./server/config/routes')(app);
+require('./config/routes')(app);
 
 // Login 
 app.post('/api/v1/login', userCtrl.postlogin);
@@ -63,9 +63,6 @@ app.post('/api/v1/signup', userCtrl.signup);
 app.post('/v1/todolist', todoCtrl.newTodo);
 app.get('/v1/todolist', todoCtrl.listTodo);
 
-// Delete todo
-app.delete('/v1/todolist', todoCtrl.deleteTodo);
-
 // Logout
 app.post('/logout', userCtrl.logout);
 
@@ -75,8 +72,8 @@ app.get('/*', function (req, res) {
     var email = '';
 
     if (req.user) {
-        username = req.user.username,
-        email = req.user.email
+        username = req.user.username;
+        email = req.user.email;
     }
 
     res.cookie('user', JSON.stringify({

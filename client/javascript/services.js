@@ -97,14 +97,13 @@ services.factory('ErrorService', function() {
 });
 
 services.factory('errorHttpInterceptor', function ($q, $location, ErrorService, $rootScope) {
-    console.log('errorHttpInterceptor accessed');
     return function (promise) {
         return promise.then(function (response) {
             return response;
         }, function (response) {
             if (response.status === 401) {
-                console.log('broadcast');
-                $rootScope.$broadcast('event:LoginRequired');
+                //$rootScope.$broadcast('event:LoginRequired');
+                ErrorService.setError('Wrong username and/or password... Please try again!!')
             } else if (response.status >= 400 && response.status < 500) {
                 ErrorService.setError('Server was unable to find' +
                     ' what u were looking for... Sorry!!');

@@ -1,7 +1,7 @@
 <login-toolbar></login-toolbar>
+<div>
+	<h2 data-ng-show="!security.isAuthenticated()">Welcome. Please log in.</h2>
+	<h2 data-ng-show="security.isAuthenticated()">Hello {{security.currentUser.username}}</h2>
+</div>
 <login></login>
 <signup></signup>
-<div>
-	<h2 ng-show="!security.isAuthenticated()">Welcome. Please log in.</h2>
-	<h2 ng-show="security.isAuthenticated()">Hello {{security.currentUser.username}}</h2>
-</div>
