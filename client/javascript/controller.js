@@ -12,7 +12,7 @@ controllers.controller('mainCtrl', function ($scope, $location, Security, ErrorS
 	}
 );
 
-controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $cookieStore, Security, Todo, TodoList, ErrorService) {
+controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $http, $cookieStore, Security, Todo, TodoList, ErrorService) {
 		
 		$scope.security = Security;
 		$scope.errorService = ErrorService;
@@ -27,8 +27,15 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $coo
 
 		$scope.delete = function(){
         	var id = this.todo._id;
+        	
+        	/*$http.delete('/v1/todolist', {id: id}).success(function (res) {
+        		$scope.err = JSON.stringify(res.err);
+            	$location.path('/todo');
+        	});*/
+
         	TodoList.delete({ id:id }, function (res) {
             	$scope.err = JSON.stringify(res.err);
+            	$location.path('/todo');
         	});
     	} 
 

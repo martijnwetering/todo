@@ -37,5 +37,30 @@ exports.listTodo = function (req, res) {
 };
 
 exports.deleteTodo = function (req, res) {
+
+    var conditions, callback, retObj;
+
+    conditions = {_id: req.params.id},
     
+    Todo.remove(conditions, function (err, doc) {
+        retObj = {
+            meta: {"action": "delete", 'timestamp': new Date()},
+            doc: doc,
+            err: err
+        };
+        return res.json(retObj);
+    });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -64,7 +64,7 @@ app.post('/v1/todolist', todoCtrl.newTodo);
 app.get('/v1/todolist', todoCtrl.listTodo);
 
 // Delete todo
-app.delete('/v1/todolist', todoCtrl.deleteTodo);
+app.delete('/v1/todolist/:id', todoCtrl.deleteTodo);
 
 // Logout
 app.post('/logout', userCtrl.logout);

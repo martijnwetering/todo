@@ -28,7 +28,7 @@ services.factory('TodoList', ['$resource', '$http', 'Security',
                     'delete': {method: 'DELETE'},
                     'update': {method: 'PUT'}
                 }; 
-            return $resource('/v1/todolist', {}, actions);
+            return $resource('/v1/todolist/:id', {}, actions);
         }      
     ]);
 
@@ -104,7 +104,7 @@ services.factory('errorHttpInterceptor', function ($q, $location, ErrorService, 
             if (response.status === 401) {
                 //$rootScope.$broadcast('event:LoginRequired');
                 ErrorService.setError('Wrong username and/or password... Please try again!!')
-            } else if (response.status >= 400 && response.status < 500) {
+            } else if (response.status >= 400 && response.status <= 500) {
                 ErrorService.setError('Server was unable to find' +
                     ' what u were looking for... Sorry!!');
             } 
