@@ -69,7 +69,7 @@ app.delete('/v1/todolist/:id', todoCtrl.deleteTodo);
 // Logout
 app.post('/logout', userCtrl.logout);
 
-app.get('/*', function (req, res) {
+app.get('/*', function(req, res) {
     console.log('all accessed');
     var username = '';
     var email = '';
