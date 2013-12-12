@@ -25,24 +25,7 @@ exports.logout = function (req, res) {
   res.send(200);
 };
 
-// POST /login
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-//
-//   
-/***** This version has a problem with flash messages
-app.post('/dmz/login', 
-  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-  function(req, res) {
-    res.redirect('/');
-  });
-*/
-  
-// POST /login
-//   This is an alternative implementation that uses a custom callback to
-//   acheive the same functionality.
+
 exports.postlogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
@@ -55,4 +38,41 @@ exports.postlogin = function(req, res, next) {
     });
   })(req, res, next);
 };
+
+
+exports.checkUnique = function(req, res) {
+    var name = req.body.username;
+    var user = {username: name};
+
+    userModel
+        .find(user)
+        .exec(function(err, data) {
+        if (data.length < 1) {
+            res.json({isUnique: true})
+        } if (data.length > 0) {
+            res.json({isUnique: false})
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

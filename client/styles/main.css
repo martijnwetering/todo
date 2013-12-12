@@ -1,3 +1,4 @@
+/*
 .password-strength-0 {
     text-align: center;
     font-weight: bold;
@@ -22,6 +23,7 @@
     background-color: green;
     border-color: green;
 }
+*/
 
 ul {
     list-style:none;
@@ -55,6 +57,20 @@ ul > li > a {
 .toolbar{
     border-bottom: 2px solid black;
     margin-bottom: 10px;
+}
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+input.ng-valid {
+    border: 1px solid green;
+}
+
+.error {
+    color: white;
+    background-color: indianred;
+    padding: 0.2em;
+    width: 47%;
 }
 
 

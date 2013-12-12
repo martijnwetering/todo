@@ -38,9 +38,9 @@ directives.directive("signup", function () {
             $scope.user = {};
             $scope.security = Security;
         },
-        link: function (scope) {
+        link: function (scope, element, attrs) {
             scope.$watch("user.password", function (value) {
-                //scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
+                scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
             });
         }
     };
@@ -75,6 +75,26 @@ directives.directive('alertBar', function ($parse) {
         }
     };
 });
+
+directives.directive('ensureUnique', ['$http', function($http) {
+    return {
+        require: 'ngModel',
+        link: function(scope, ele, attrs, c) {
+            console.log(scope.user.username);
+            scope.$watch(attrs.ngModel, function() {
+                $http({
+                    method: 'POST',
+                    url: '/api/v1/check/' + scope.user.username,
+                    data: {'username': scope.user.username}
+                }).success(function(data, status, headers, cfg) {
+                        c.$setValidity('unique', data.isUnique);
+                    }).error(function(data, status, headers, cfg) {
+                        c.$setValidity('unique', false);
+                    });
+            });
+        }
+    }
+}]);
 
 
 

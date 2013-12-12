@@ -69,6 +69,8 @@ app.delete('/v1/todolist/:id', todoCtrl.deleteTodo);
 // Logout
 app.post('/logout', userCtrl.logout);
 
+app.post('/api/v1/check/:name', userCtrl.checkUnique);
+
 app.get('/*', function(req, res) {
     console.log('all accessed');
     var username = '';
