@@ -76,10 +76,10 @@ directives.directive('alertBar', function ($parse) {
     };
 });
 
-directives.directive('ensureUnique', ['$http', function($http) {
+directives.directive('ensureUnique', function($http) {
     return {
         require: 'ngModel',
-        link: function(scope, ele, attrs, c) {
+        link: function(scope, ele, attrs, ctrl) {
             console.log(scope.user.username);
             scope.$watch(attrs.ngModel, function() {
                 $http({
@@ -87,14 +87,36 @@ directives.directive('ensureUnique', ['$http', function($http) {
                     url: '/api/v1/check/' + scope.user.username,
                     data: {'username': scope.user.username}
                 }).success(function(data, status, headers, cfg) {
-                        c.$setValidity('unique', data.isUnique);
+                        ctrl.$setValidity('unique', data.isUnique);
                     }).error(function(data, status, headers, cfg) {
-                        c.$setValidity('unique', false);
+                        ctrl.$setValidity('unique', false);
                     });
             });
         }
     }
-}]);
+});
+
+directives.directive('ngFocus', function() {
+    var FOCUS_CLASS = "ng-focused";
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, element, attrs, ctrl) {
+            ctrl.$focused = false;
+            element.bind('focus', function(evt) {
+                element.addClass(FOCUS_CLASS);
+                scope.$apply(function() {
+                    ctrl.$focused = true;
+                });
+            }).bind('blur', function(evt) {
+                    element.removeClass(FOCUS_CLASS);
+                    scope.$apply(function() {
+                        ctrl.$focused = false;
+                    });
+                });
+        }
+    }
+});
 
 
 

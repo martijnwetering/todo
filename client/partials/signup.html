@@ -3,18 +3,18 @@
     <form novalidate name="signupForm" data-ng-submit="security.signup(user.username, user.email, user.password, user.password2)">
         <div>
             <label>Username:</label>
-            <input type="text" required name="username" ng-minlength=3 ng-maxlength=20 ng-model="user.username" ensure-unique="username"/>
-            <div class="error" ng-show="signupForm.username.$dirty && signupForm.username.$invalid">
-                <small class="error" ng-show="signupForm.username.$error.required">
+            <input type="text" required name="username" data-ng-minlength=3 data-ng-maxlength=20 data-ng-model="user.username" ensure-unique="username" ng-focus/>
+            <div class="error" data-ng-show="signupForm.username.$dirty && signupForm.username.$invalid && !signupForm.username.$focused">
+                <small class="error" data-ng-show="signupForm.username.$error.required">
                     Your name is required.
                 </small>
-                <small class="error" ng-show="signupForm.username.$error.minlength">
+                <small class="error" data-ng-show="signupForm.username.$error.minlength">
                     Your name is required to be at least 3 characters
                 </small>
-                <small class="error" ng-show="signupForm.username.$error.maxlength">
+                <small class="error" data-ng-show="signupForm.username.$error.maxlength">
                     Your name cannot be longer than 20 characters
                 </small>
-                <small class="error" ng-show="signupForm.username.$error.unique">
+                <small class="error" data-ng-show="signupForm.username.$error.unique">
                     That username is taken, please try another
                 </small>
             </div>
@@ -22,18 +22,32 @@
         </div>
         <div>
             <label>Email:</label>
-            <input type="email" required name="email" ng-model="user.email"/><br/>
+            <input type="email" required name="email" data-ng-model="user.email" data-ng-minlength=3 data-ng-maxlength=20 ng-focus />
+            <div class="error" data-ng-show="signupForm.email.$dirty && signupForm.email.$invalid && !signupForm.email.$focused">
+                <small class="error" data-ng-show="signupForm.email.$error.required">
+                    Your email is required.
+                </small>
+                <small class="error" data-ng-show="signupForm.email.$error.minlength">
+                    Your email is required to be at least 3 characters
+                </small>
+                <small class="error" data-ng-show="signupForm.email.$error.email">
+                    That is not a valid email. Please input a valid email.
+                </small>
+                <small class="error" data-ng-show="signupForm.email.$error.maxlength">
+                    Your email cannot be longer than 20 characters
+                </small>
+            <br/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="password" required name="password" ng-model="user.password"/>
+            <input type="password" required name="password" data-ng-model="user.password"/>
         </div>
         <div>
             <label>Repeat password:</label>
-            <input type="password" required name="password2" ng-model="user.password2"/>
+            <input type="password" required name="password2" data-ng-model="user.password2"/>
         </div>
         <div>
-            <input id="submit" type="submit" value="Sign up"/>
+            <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
         </div>
     </form>
     <p>
