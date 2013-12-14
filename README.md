@@ -1,7 +1,5 @@
-Todolist application with login and form validation
-===================================================
-in AngularJS, Express, Node.js and MongoDB.
-===================================================
+Todolist application with login and form validation in AngularJS, Express, Node.js and MongoDB.
+===============================================================================================
 
 The purpose of this applocation is to test out different
 features provided in a MEAN-stack. U can create an user, 
@@ -13,7 +11,7 @@ Node.js and MongoDB installed.
 
 Setup
 =====
-clone the repository
+Clone the repository
     git clone https://github.com/martijnwetering/todo.git
 
 
