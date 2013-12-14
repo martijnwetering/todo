@@ -1,4 +1,5 @@
 Todolist application with login and form validation
+===================================================
 in AngularJS, Express, Node.js and MongoDB.
 ===================================================
 
@@ -12,7 +13,7 @@ Node.js and MongoDB installed.
 
 Setup
 =====
-clone the repository with:
+clone the repository
     git clone https://github.com/martijnwetering/todo.git
 
 
