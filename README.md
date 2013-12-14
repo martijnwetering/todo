@@ -12,7 +12,7 @@ Node.js and MongoDB installed.
 Setup
 =====
 Clone the repository
-    git clone https://github.com/martijnwetering/todo.git
+    'git clone https://github.com/martijnwetering/todo.git'
 
 
 Installation node modules
