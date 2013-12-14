@@ -1,4 +1,3 @@
 Installation
 ============
-
-> node npm install
+    node npm install
