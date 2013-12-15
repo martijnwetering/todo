@@ -1,5 +1,4 @@
-Todolist application with login and form validation in AngularJS, Express, Node.js and MongoDB.
-===============================================================================================
+#Todolist application in MEAN-stack
 
 The purpose of this application is to test out different
 features provided in a MEAN-stack. You can create an user, 
