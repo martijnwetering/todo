@@ -6,7 +6,7 @@ login with that user and create your own todolist. There
 is form validation on the client and the server.
 
 ##Setup
-**note:** To run this application you need to have Node.js and MongoDb installed and running.
+**NOTE:** To run this application you need to have Node.js and MongoDb installed and running.
 
 In the terminal go to the directory where you want to put the application and type:
 
