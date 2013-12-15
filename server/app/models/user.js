@@ -73,7 +73,9 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
 // Export user model
 var modelName = "User";
-var collectionName = "Users"; 
+var collectionName = "Users";
+
+mongoose.model(modelName, userSchema, collectionName);
 
 var userModel = mongoose.model(modelName, userSchema, collectionName);
 exports.userModel = userModel;
