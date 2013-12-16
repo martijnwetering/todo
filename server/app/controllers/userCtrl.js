@@ -1,5 +1,4 @@
 var passport =          require('passport')
-    , LocalStrategy =   require('passport-local').Strategy
     , db =              require('../models/user.js')
     , mongoose =        require('mongoose')
     , userModel =       mongoose.model('User');
@@ -13,8 +12,10 @@ exports.signup = function (req, res) {
               return res.json(401, {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
             }
             req.login(user, function (err) {
-                if (err) return next(err);
-                // successful login
+                if (err) {
+                    return next(err);
+                }
+                // successful sign up
                 res.json(200, {user: user});
             });
         });
@@ -33,14 +34,18 @@ exports.postlogin = function(req, res, next) {
       return res.json(401, {message: info.message});
     }
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
+      if (err) {
+          return next(err);
+      }
       return res.json({user: user});
     });
   })(req, res, next);
 };
 
-
+// Checks the database to see if the username
+// is unique.
 exports.checkUnique = function(req, res) {
+
     var name = req.body.username;
     var user = {username: name};
 

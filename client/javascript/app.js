@@ -1,4 +1,4 @@
-// This regulates which route go's with which template and controller
+// Client-side routing.
 var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myApp.directives']);
 
     myApp.config(['$routeProvider', function ($routeProvider) {

@@ -1,11 +1,11 @@
 var directives = angular.module('myApp.directives', []);
 
-directives.directive("login", function () {
+directives.directive('login', function () {
     return {
-        restrict: "E",
+        restrict: 'E',
         scope: {},
         replace: true,
-        templateUrl: "partials/login.html",
+        templateUrl: 'partials/login.html',
         controller: function ($scope, Security, ErrorService) {
             $scope.security = Security;
         },
@@ -14,12 +14,12 @@ directives.directive("login", function () {
     };
 });
 
-directives.directive("loginToolbar", function () {
+directives.directive('loginToolbar', function () {
     return {
-        restrict: "E",
+        restrict: 'E',
         scope: {},
         replace: true,
-        templateUrl: "partials/login-toolbar.html",
+        templateUrl: 'partials/login-toolbar.html',
         controller: function ($scope, Security, ErrorService) {
             $scope.security = Security;
         },
@@ -28,18 +28,18 @@ directives.directive("loginToolbar", function () {
     };
 });
 
-directives.directive("signup", function () {
+directives.directive('signup', function () {
     return {
-        restrict: "E",
+        restrict: 'E',
         scope: {},
         replace: true,
-        templateUrl: "partials/signup.html",
+        templateUrl: 'partials/signup.html',
         controller: function ($scope, Security, ErrorService) {
             $scope.user = {};
             $scope.security = Security;
         },
         link: function (scope, element, attrs) {
-            scope.$watch("user.password", function (value) {
+            scope.$watch('user.password', function (value) {
                 scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
             });
         }

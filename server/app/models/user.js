@@ -8,7 +8,6 @@ var mongoose =      require('mongoose')
 
 var Schema = mongoose.Schema;
 
-// User schema
 var userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
@@ -18,12 +17,8 @@ var userSchema = new Schema({
 
 
 var MIN_PASSWORD_SCORE = 2;
- 
-// snip
- 
-// Helper function to create a new user
+
 exports.createUser = function(username, emailaddress, password1, password2, adm, done) {
-    // convert adm string to bool
  
     if (password1 !== password2) return done(new Error("Passwords must match"));
  
@@ -39,7 +34,6 @@ exports.createUser = function(username, emailaddress, password1, password2, adm,
         if(err) {
             done(err);
         } else {
-          console.log('User saved');
           done(null, user);
         }
     });

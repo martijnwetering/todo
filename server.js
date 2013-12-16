@@ -1,15 +1,12 @@
 var express =           require('express')
     , fs =              require('fs')
     , passport =        require('passport')
-    , LocalStrategy =   require('passport-local').Strategy
     , mongoose =        require('mongoose')
     , path =            require('path')
     , pass =            require('./server/config/pass.js')
     , userCtrl =        require('./server/app/controllers/userCtrl.js')
     , todoCtrl =        require('./server/app/controllers/todoCtrl.js');
 
-//Load configurations
-//if test env, load example file
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     config = require('./server/config/config')[env];
 
@@ -50,25 +47,18 @@ app.use(express.session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Bootstrap routes
-require('./server/config/routes')(app);
-
 // Login 
 app.post('/api/v1/login', userCtrl.postlogin);
-
 // Signup 
 app.post('/api/v1/signup', userCtrl.signup);
-
 // Todo
 app.post('/v1/todolist', todoCtrl.newTodo);
 app.get('/v1/todolist', todoCtrl.listTodo);
-
 // Delete todo
 app.delete('/v1/todolist/:id', todoCtrl.deleteTodo);
-
 // Logout
 app.post('/logout', userCtrl.logout);
-
+// Checks if username is unique
 app.post('/api/v1/check/:name', userCtrl.checkUnique);
 
 app.get('/*', function(req, res) {
