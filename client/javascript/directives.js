@@ -67,9 +67,7 @@ directives.directive('alertBar', function ($parse) {
             $scope.errorService = ErrorService;
         },
         link: function (scope, elem, attrs) {
-            console.log(scope);
             var alertMessageAttr = attrs['alertmessage'];
-            console.log(alertMessageAttr);
             scope.errorMessage = null;
 
             scope.$watch(alertMessageAttr, function (data) {
@@ -88,7 +86,6 @@ directives.directive('ensureUnique', function($http) {
     return {
         require: 'ngModel',
         link: function(scope, ele, attrs, ctrl) {
-            console.log(scope.user.username);
             scope.$watch(attrs.ngModel, function() {
                 $http({
                     method: 'POST',
