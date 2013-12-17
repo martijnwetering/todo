@@ -10,7 +10,7 @@
 	</form><br />
 	<table class="table table-striped">
 		<tr data-ng-repeat="todo in todos.doc | orderBy:'action' ">
-			<td><a href="#" data-ng-click="delete()"><i class="icon-remove"></i></a></td>
+			<td><a href="#" data-ng-click="deleteItem()"><i class="icon-remove"></i></a></td>
 			<td><a href="#" class="done-{{todo.done}}" data-ng-click="update()">{{todo.content}}</a</td>
 		</tr>
 	</table>

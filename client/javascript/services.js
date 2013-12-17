@@ -14,7 +14,7 @@ services.factory('Todo', ['$resource', '$http',
                     'delete': {method: 'DELETE'},
                     'update': {method: 'PUT'}
                 }; 
-            return $resource('/v1/todolist', {}, actions);
+            return $resource('/api/v1/todolist', {}, actions);
         }      
     ]);
 
@@ -28,7 +28,7 @@ services.factory('TodoList', ['$resource', '$http', 'Security',
                     'delete': {method: 'DELETE'},
                     'update': {method: 'PUT'}
                 }; 
-            return $resource('/v1/todolist/:id', {}, actions);
+            return $resource('/api/v1/todolist/:id', {}, actions);
         }      
     ]);
 
@@ -71,7 +71,7 @@ services.factory('Security', function ($location, $cookieStore, $http) {
                 isLogoutShown: false,
                 logout: function () {
                     var that = this;
-                    $http.post('/logout').success(function () {
+                    $http.post('/api/logout').success(function () {
                         that.isLogoutShown = false;
                         that.currentUser = {};
                         $location.path('/');

@@ -52,12 +52,12 @@ app.post('/api/v1/login', userCtrl.postlogin);
 // Signup 
 app.post('/api/v1/signup', userCtrl.signup);
 // Todo
-app.post('/v1/todolist', todoCtrl.newTodo);
-app.get('/v1/todolist', todoCtrl.listTodo);
+app.post('/api/v1/todolist', todoCtrl.newTodo);
+app.get('/api/v1/todolist', todoCtrl.listTodo);
 // Delete todo
-app.delete('/v1/todolist/:id', todoCtrl.deleteTodo);
+app.delete('/api/v1/todolist/:id', todoCtrl.deleteTodo);
 // Logout
-app.post('/logout', userCtrl.logout);
+app.post('/api/logout', userCtrl.logout);
 // Checks if username is unique
 app.post('/api/v1/check/:name', userCtrl.checkUnique);
 

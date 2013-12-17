@@ -1,7 +1,7 @@
 // Client-side routing.
 var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myApp.directives']);
 
-    myApp.config(['$routeProvider', function ($routeProvider) {
+    myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     
         $routeProvider.when('/', {
             templateUrl: 'partials/main.html',
@@ -16,6 +16,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myA
             controller: 'todoCtrl'
         })
         .otherwise({redirectTo: '/'});
+        $locationProvider.html5Mode(true);
 
     }]
     );

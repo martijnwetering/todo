@@ -25,11 +25,11 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
 			$scope.todo.content = '';
 		};
 
-		$scope.delete = function(){
+		$scope.deleteItem = function(){
             var id = this.todo._id;
             TodoList.delete({ id:id }, function (res) {
                 $scope.err = JSON.stringify(res.err);
-                $location.path('/todo');
+                getTodo();
             });
         };
 
