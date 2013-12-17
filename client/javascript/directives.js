@@ -39,13 +39,19 @@ directives.directive('signup', function () {
             $scope.security = Security;
         },
         link: function (scope, element, attrs) {
+            var pass1 = '';
+            var pass2 = '';
             scope.$watch('user.password', function (value) {
-                //scope.user.passwordStrength = !value || value.length === 0 ? 0 : typeof zxcvbn !== "undefined" ? zxcvbn(value).score : 0;
-                scope.user.passwordStrength = value == undefined ? 0 : zxcvbn(value).score;
-
+                pass1 = value;
+                scope.user.passwordStrength = value == undefined ? 0 : typeof zxcvbn !== undefined ?  zxcvbn(value).score : 0;
+                scope.passwordEqual = pass1 == pass2 && pass1 != undefined && pass2 != undefined;
+            });
+            scope.$watch('user.password2', function (value) {
+                pass2 = value;
+                scope.passwordEqual = pass1 == pass2 && pass1 != undefined && pass2 != undefined;
             });
         }
-    };
+    }
 });
 
 directives.directive('alertBar', function ($parse) {

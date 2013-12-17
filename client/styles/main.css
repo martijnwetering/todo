@@ -47,7 +47,7 @@ input.ng-pristine {
 .error {
     color: white;
     background-color: indianred;
-    padding: 0.2em;
+    padding: 0.5em;
     width: 47%;
 }
 

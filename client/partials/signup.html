@@ -58,7 +58,10 @@
         </div>
         <div>
             <label>Repeat password:</label>
-            <input type="password" required name="password2" data-ng-model="user.password2"/>
+            <input type="password" required name="password2" data-ng-model="user.password2" ng-focus/>
+            <div class="password-check" data-ng-show="!signupForm.password2.$focused && signupForm.password2.$dirty">
+                <small class="error" data-ng-show="!passwordEqual">Passwords don't match</small>
+            </div>
         </div>
         <div>
             <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
