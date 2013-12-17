@@ -62,7 +62,6 @@ app.post('/api/logout', userCtrl.logout);
 app.post('/api/v1/check/:name', userCtrl.checkUnique);
 
 app.get('/*', function(req, res) {
-    console.log('all accessed');
     var username = '';
     var email = '';
 
