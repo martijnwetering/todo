@@ -39,5 +39,6 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
 		};
 		getTodo();
 
+        this.message = 10;
 	}
 );

@@ -20,3 +20,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myA
 
     }]
     );
+
+    myApp.controller('simpleCtrl', function ($scope) {
+       this.message = 'Hello';
+    });
