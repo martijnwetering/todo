@@ -1,5 +1,5 @@
 // Client-side routing.
-var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myApp.directives']);
+var myApp = angular.module('myApp', ['myApp.services', 'myApp.controllers', 'myApp.directives', 'ngRoute']);
 
     myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     

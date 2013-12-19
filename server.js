@@ -60,8 +60,8 @@ app.get('/*', function(req, res) {
     var email = '';
 
     if (req.user) {
-        username = req.user.username,
-        email = req.user.email
+        username = req.user.username;
+        email = req.user.email;
     }
 
     res.cookie('user', JSON.stringify({
