@@ -43,7 +43,7 @@ directives.directive('signup', function () {
             var pass2 = '';
             scope.$watch('user.password', function (value) {
                 pass1 = value;
-                scope.user.passwordStrength = value == undefined ? 0 : typeof zxcvbn !== undefined ?  zxcvbn(value).score : 0;
+                scope.user.passwordStrength = value == undefined ? 0 : typeof zxcvbn !== undefined ? zxcvbn(value).score : 0;
                 scope.passwordEqual = pass1 == pass2 && pass1 != undefined && pass2 != undefined;
             });
             scope.$watch('user.password2', function (value) {
@@ -58,11 +58,11 @@ directives.directive('alertBar', function ($parse) {
     return {
         restrict: 'A',
         template: '<div class="alert alert-error alert-bar"' +
-                    'data-ng-show="errorMessage">' +
-                    '<button type="button" class="close" data-ng-click="hideAlert()">' +
-                    'x</button>' +
-                    '{{errorMessage}}</div>',
-        controller: function($scope, Security, ErrorService) {
+            'data-ng-show="errorMessage">' +
+            '<button type="button" class="close" data-ng-click="hideAlert()">' +
+            'x</button>' +
+            '{{errorMessage}}</div>',
+        controller: function ($scope, Security, ErrorService) {
             $scope.security = Security;
             $scope.errorService = ErrorService;
         },
@@ -74,7 +74,7 @@ directives.directive('alertBar', function ($parse) {
                 scope.errorMessage = data;
             });
 
-            scope.hideAlert = function() {
+            scope.hideAlert = function () {
                 scope.errorMessage = null;
                 $parse(alertMessageAttr).assign(scope, null);
             };
@@ -82,18 +82,18 @@ directives.directive('alertBar', function ($parse) {
     };
 });
 
-directives.directive('ensureUnique', function($http) {
+directives.directive('checkIfUsernameIsUnique', function ($http) {
     return {
         require: 'ngModel',
-        link: function(scope, ele, attrs, ctrl) {
-            scope.$watch(attrs.ngModel, function() {
+        link: function (scope, ele, attrs, ctrl) {
+            scope.$watch(attrs.ngModel, function () {
                 $http({
                     method: 'POST',
                     url: '/api/v1/check/' + scope.user.username,
                     data: {'username': scope.user.username}
-                }).success(function(data, status, headers, cfg) {
+                }).success(function (data, status, headers, cfg) {
                         ctrl.$setValidity('unique', data.isUnique);
-                    }).error(function(data, status, headers, cfg) {
+                    }).error(function (data, status, headers, cfg) {
                         ctrl.$setValidity('unique', false);
                     });
             });
@@ -101,21 +101,21 @@ directives.directive('ensureUnique', function($http) {
     }
 });
 
-directives.directive('ngFocus', function() {
+directives.directive('ngFocus', function () {
     var FOCUS_CLASS = "ng-focused";
     return {
         restrict: 'A',
         require: 'ngModel',
-        link: function(scope, element, attrs, ctrl) {
+        link: function (scope, element, attrs, ctrl) {
             ctrl.$focused = false;
-            element.bind('focus', function(evt) {
+            element.bind('focus',function (evt) {
                 element.addClass(FOCUS_CLASS);
-                scope.$apply(function() {
+                scope.$apply(function () {
                     ctrl.$focused = true;
                 });
-            }).bind('blur', function(evt) {
+            }).bind('blur', function (evt) {
                     element.removeClass(FOCUS_CLASS);
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         ctrl.$focused = false;
                     });
                 });

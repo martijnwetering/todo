@@ -1,10 +1,13 @@
-
 <div data-ng-show="security.isSignupShown">
-    <form novalidate name="signupForm" data-ng-submit="security.signup(user.username, user.email, user.password, user.password2)">
+    <form novalidate name="signupForm"
+          data-ng-submit="security.signup(user.username, user.email, user.password, user.password2)">
         <div>
             <label>Username:</label>
-            <input type="text" required name="username" data-ng-minlength=3 data-ng-maxlength=20 data-ng-model="user.username" ensure-unique="username" ng-focus/>
-            <div class="error" data-ng-show="signupForm.username.$dirty && signupForm.username.$invalid && !signupForm.username.$focused">
+            <input type="text" required name="username" data-ng-minlength=3 data-ng-maxlength=20
+                   data-ng-model="user.username" check-if-username-is-unique ng-focus/>
+
+            <div class="error"
+                 data-ng-show="signupForm.username.$dirty && signupForm.username.$invalid && !signupForm.username.$focused">
                 <small class="error" data-ng-show="signupForm.username.$error.required">
                     Your name is required.
                 </small>
@@ -22,8 +25,11 @@
         </div>
         <div>
             <label>Email:</label>
-            <input type="email" required name="email" data-ng-model="user.email" data-ng-minlength=3 data-ng-maxlength=20 ng-focus />
-            <div class="error" data-ng-show="signupForm.email.$dirty && signupForm.email.$invalid && !signupForm.email.$focused">
+            <input type="email" required name="email" data-ng-model="user.email" data-ng-minlength=3
+                   data-ng-maxlength=20 ng-focus/>
+
+            <div class="error"
+                 data-ng-show="signupForm.email.$dirty && signupForm.email.$invalid && !signupForm.email.$focused">
                 <small class="error" data-ng-show="signupForm.email.$error.required">
                     Your email is required.
                 </small>
@@ -36,36 +42,39 @@
                 <small class="error" data-ng-show="signupForm.email.$error.maxlength">
                     Your email cannot be longer than 20 characters
                 </small>
-            <br/>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" required name="password" data-ng-model="user.password"/>
-            <div class="password-check" data-ng-show="signupForm.password.$dirty" >
-                <small class="password-very-weak" data-ng-show="user.passwordStrength <= 1">
-                    VERY WEAK!
-                </small>
-                <small class="password-weak" data-ng-show="user.passwordStrength == 2">
-                    WEAK!
-                </small>
-                <small class="password-medium" data-ng-show="user.passwordStrength == 3">
-                    MEDIUM!
-                </small>
-                <small class="password-strong" data-ng-show="user.passwordStrength >= 4">
-                    STRONG!
-                </small>
+                <br/>
             </div>
-        </div>
-        <div>
-            <label>Repeat password:</label>
-            <input type="password" required name="password2" data-ng-model="user.password2" ng-focus/>
-            <div class="password-check" data-ng-show="!signupForm.password2.$focused && signupForm.password2.$dirty">
-                <small class="error" data-ng-show="!passwordEqual">Passwords don't match</small>
+            <div>
+                <label>Password:</label>
+                <input type="password" required name="password" data-ng-model="user.password"/>
+
+                <div class="password-check" data-ng-show="signupForm.password.$dirty">
+                    <small class="password-very-weak" data-ng-show="user.passwordStrength <= 1">
+                        VERY WEAK!
+                    </small>
+                    <small class="password-weak" data-ng-show="user.passwordStrength == 2">
+                        WEAK!
+                    </small>
+                    <small class="password-medium" data-ng-show="user.passwordStrength == 3">
+                        MEDIUM!
+                    </small>
+                    <small class="password-strong" data-ng-show="user.passwordStrength >= 4">
+                        STRONG!
+                    </small>
+                </div>
             </div>
-        </div>
-        <div>
-            <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
-        </div>
+            <div>
+                <label>Repeat password:</label>
+                <input type="password" required name="password2" data-ng-model="user.password2" ng-focus/>
+
+                <div class="password-check"
+                     data-ng-show="!signupForm.password2.$focused && signupForm.password2.$dirty">
+                    <small class="error" data-ng-show="!passwordEqual">Passwords don't match</small>
+                </div>
+            </div>
+            <div>
+                <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
+            </div>
     </form>
     <p>
         <small>Hint - some strong password are correcthorsebatterystaple, rWibMFACxAUGZmxhVncy,
