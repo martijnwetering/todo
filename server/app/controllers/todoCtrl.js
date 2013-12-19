@@ -3,7 +3,6 @@ var mongoose =     require('mongoose')
 	, Todo =       mongoose.model('Todo');
 
 exports.newTodo = function (req, res) {
-
 	var doc = new Todo(req.body);
     doc.save(function (err) {
         var retObj = {
@@ -16,7 +15,6 @@ exports.newTodo = function (req, res) {
 };
 
 exports.listTodo = function (req, res) {
-
     var conditions, fields, options, id;
     id = {userId: req.user.email};
     conditions = {};
@@ -36,7 +34,6 @@ exports.listTodo = function (req, res) {
 };
 
 exports.deleteTodo = function (req, res) {
-
     var conditions, callback, retObj;
     conditions = {_id: req.params.id};
     

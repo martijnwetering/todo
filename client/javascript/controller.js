@@ -18,11 +18,11 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
 		$scope.errorService = ErrorService;
 
 		$scope.newTodo = function () {
-			$scope.todo.userId = Security.currentUser.email;
+            $scope.todo.userId = Security.currentUser.email;
 			Todo.save({}, $scope.todo, function (res) {
-				getTodo();
+				$scope.todo.content = '';
+                getTodo();
 			});
-			$scope.todo.content = '';
 		};
 
 		$scope.deleteItem = function(){

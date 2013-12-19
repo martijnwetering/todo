@@ -58,8 +58,8 @@ exports.logout = function (req, res) {
 };
 
 
-exports.postlogin = function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+exports.postlogin = function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err); }
     if (!user) {
       return res.json(401, {message: info.message});

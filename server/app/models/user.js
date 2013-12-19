@@ -14,10 +14,6 @@ var userSchema = new Schema({
   admin: { type: Boolean, required: true }
 });
 
-var modelName = "User";
-var collectionName = "Users";
-mongoose.model(modelName, userSchema, collectionName);
-
 // Bcrypt middleware
 userSchema.pre('save', function(next) {
 	var user = this;
@@ -42,3 +38,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 		cb(null, isMatch);
 	});
 };
+
+var modelName = "User";
+var collectionName = "Users";
+mongoose.model(modelName, userSchema, collectionName);
