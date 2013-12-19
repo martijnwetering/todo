@@ -1,6 +1,6 @@
 
 <div data-ng-show="security.isSignupShown">
-    <form novalidate name="signupForm" data-ng-submit="security.signup(user.username, user.email, user.password, user.password2)">
+    <form novalidate name="signupForm" data-ng-submit="security.signup(user)">
         <div>
             <label>Username:</label>
             <input type="text" required name="username" data-ng-minlength=3 data-ng-maxlength=20 data-ng-model="user.username" ensure-unique="username" ng-focus/>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div>
-            <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
+            <button class="btn" type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
         </div>
     </form>
     <p>

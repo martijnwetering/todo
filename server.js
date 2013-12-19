@@ -47,20 +47,14 @@ app.use(express.session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Login 
+// Routes
 app.post('/api/v1/login', userCtrl.postlogin);
-// Signup 
 app.post('/api/v1/signup', userCtrl.signup);
-// Todo
 app.post('/api/v1/todolist', todoCtrl.newTodo);
 app.get('/api/v1/todolist', todoCtrl.listTodo);
-// Delete todo
 app.delete('/api/v1/todolist/:id', todoCtrl.deleteTodo);
-// Logout
 app.post('/api/logout', userCtrl.logout);
-// Checks if username is unique
-app.post('/api/v1/check/:name', userCtrl.checkUnique);
-
+app.post('/api/v1/check/:name', userCtrl.checkIfUsernameIsUnique);
 app.get('/*', function(req, res) {
     var username = '';
     var email = '';
