@@ -1,6 +1,7 @@
-var mongoose =      require('mongoose')
-    , db =            require('./server/app/models/user.js')
-    , config =        require('./server/config/config')['development'];
+var mongoose =          require('mongoose')
+    , db =              require('./server/app/models/user.js')
+    , User =            mongoose.model('User')
+    , config =          require('./server/config/config')['development'];
 
 var database = mongoose.connect(config.db, function (err, res) {
   if (err) { 
@@ -33,22 +34,26 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('adduser', 'add a user to the database', function(username, emailaddress, password, password2) {
+  grunt.registerTask('adduser', 'add a user to the database', function(username, emailaddress, password) {
 
       var done = this.async();
 
-      db.createUser(username, emailaddress, password, password2, false,
-          function (err, user) {
-              if (err) {
-                  console.log('Error: ' + err);
-                  done(false);
-              } else {
-                  console.log('saved user: ' + user.username);
-                  done();
-              }
-
-          });
+      var user = new User({username: username,
+        email: emailaddress,
+        password: password,
+        admin: false
       });
+
+      user.save(function (err) {
+          if (err) {
+              console.log('Error: ' + err);
+              done(err);
+          } else {
+              console.log('Saved user: ' + user.username);
+              done();
+          }
+      });
+  });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -56,8 +61,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['watch']);
 
   grunt.registerTask('dbseed', 'seed the database', function() {
-      grunt.task.run('adduser:John:john@mail.com:correcthorsebatterystaple:correcthorsebatterystaple');
-      grunt.task.run('adduser:Jil:jil@example.com:correcthorsebatterystaple:correcthorsebatterystaple');
+      grunt.task.run('adduser:John:john@mail.com:correcthorsebatterystaple');
+      grunt.task.run('adduser:Jil:jil@mail.com:correcthorsebatterystaple');
     });
 
 };

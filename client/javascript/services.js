@@ -62,7 +62,6 @@ services.factory('Security', function ($location, $cookieStore, $http) {
             signup: function (user) {
                 var that = this;
                 $http.post('/api/v1/signup', user).success(function (data) {
-                    that.currentUser = data.user;
                     that.isSignupShown = false;
                     that.isLogoutShown = true;
                     $location.path('/todo');

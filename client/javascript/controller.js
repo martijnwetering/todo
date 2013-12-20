@@ -51,5 +51,7 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
 
         this.message = 10;
 
+        $scope.test = 'hello world';
+
     }
 );
