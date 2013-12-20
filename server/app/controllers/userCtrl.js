@@ -1,5 +1,5 @@
 var passport =          require('passport')
-    , zxcvbn =          require('zxcvbn')
+    , zxcvbn =          require('zxcvbn2')
     , mongoose =        require('mongoose')
     , db =              require('../models/user.js')
     , User =            mongoose.model('User');

@@ -1,6 +1,6 @@
 var mongoose =      require('mongoose')
     , bcrypt =      require('bcrypt')
-    , zxcvbn =      require("zxcvbn")
+    , zxcvbn =      require("zxcvbn2")
     , passport =    require('passport');
 
 var SALT_WORK_FACTOR = 10;
