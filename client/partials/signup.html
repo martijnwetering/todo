@@ -1,11 +1,9 @@
 <div data-ng-show="security.isSignupShown">
-    <form novalidate name="signupForm"
-          data-ng-submit="security.signup(user.username, user.email, user.password, user.password2)">
+    <form novalidate name="signupForm" data-ng-submit="security.signup(user)">
         <div>
             <label>Username:</label>
             <input type="text" required name="username" data-ng-minlength=3 data-ng-maxlength=20
                    data-ng-model="user.username" check-if-username-is-unique ng-focus/>
-
             <div class="error"
                  data-ng-show="signupForm.username.$dirty && signupForm.username.$invalid && !signupForm.username.$focused">
                 <small class="error" data-ng-show="signupForm.username.$error.required">
@@ -27,7 +25,6 @@
             <label>Email:</label>
             <input type="email" required name="email" data-ng-model="user.email" data-ng-minlength=3
                    data-ng-maxlength=20 ng-focus/>
-
             <div class="error"
                  data-ng-show="signupForm.email.$dirty && signupForm.email.$invalid && !signupForm.email.$focused">
                 <small class="error" data-ng-show="signupForm.email.$error.required">
@@ -66,15 +63,15 @@
             <div>
                 <label>Repeat password:</label>
                 <input type="password" required name="password2" data-ng-model="user.password2" ng-focus/>
-
                 <div class="password-check"
                      data-ng-show="!signupForm.password2.$focused && signupForm.password2.$dirty">
                     <small class="error" data-ng-show="!passwordEqual">Passwords don't match</small>
                 </div>
             </div>
             <div>
-                <button type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
+                <button class="btn" type="submit" data-ng-disabled="signupForm.$invalid">Sign Up</button>
             </div>
+        </div>
     </form>
     <p>
         <small>Hint - some strong password are correcthorsebatterystaple, rWibMFACxAUGZmxhVncy,

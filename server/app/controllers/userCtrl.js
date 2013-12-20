@@ -1,24 +1,55 @@
 var passport =          require('passport')
-    , db =              require('../models/user.js')
+    , zxcvbn =          require('zxcvbn')
     , mongoose =        require('mongoose')
-    , userModel =       mongoose.model('User');
+    , db =              require('../models/user.js')
+    , User =            mongoose.model('User');
 
- 
+
 exports.signup = function (req, res) {
     var body = req.body;
-    db.createUser(body.username, body.email, body.password, body.password2, false,
-        function (err, user) {
+    createUser(body, function (err, user) {
+        if (err) {
+            return res.json(401, {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
+        }
+        req.login(user, function (err) {
             if (err) {
-              return res.json(401, {user: req.user, message: err.code === 11000 ? "User already exists" : err.message});
+                return next(err);
             }
-            req.login(user, function (err) {
-                if (err) {
-                    return next(err);
-                }
-                // successful sign up
-                res.json(200, {user: user});
-            });
+            // successful sign up
+            res.json(200, {user: user});
         });
+    });
+}
+
+var createUser = function (body, callback) {
+    var username = body.username,
+        password1 = body.password,
+        password2 = body.password2,
+        emailaddress = body.email,
+        adm = false,
+        result = zxcvbn(password1),
+        MIN_PASSWORD_SCORE = 2;
+
+    if (password1 !== password2) {
+        return callback(new Error("Passwords must match"));
+    }
+    if (result.score < MIN_PASSWORD_SCORE) {
+        return callback(new Error("Password is too simple"));
+    }
+
+    var user = new User({ username: username
+        , email: emailaddress
+        , password: password1
+        , admin: adm
+    });
+
+    user.save(function(err) {
+        if(err) {
+            callback(err);
+        } else {
+            callback(null, user);
+        }
+    });
 };
 
 exports.logout = function (req, res) {
@@ -27,8 +58,8 @@ exports.logout = function (req, res) {
 };
 
 
-exports.postlogin = function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+exports.postlogin = function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err); }
     if (!user) {
       return res.json(401, {message: info.message});
@@ -42,14 +73,12 @@ exports.postlogin = function(req, res, next) {
   })(req, res, next);
 };
 
-// Checks the database to see if the username
-// is unique.
-exports.checkUnique = function(req, res) {
+exports.checkIfUsernameIsUnique = function(req, res) {
 
     var name = req.body.username;
     var user = {username: name};
 
-    userModel
+    User
         .find(user)
         .exec(function(err, data) {
         if (data.length < 1) {

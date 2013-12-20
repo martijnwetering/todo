@@ -14,6 +14,7 @@ controllers.controller('mainCtrl', function ($scope, $location, Security, ErrorS
 
 controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $http, $cookieStore, Security, Todo, TodoList, ErrorService) {
 
+
         $scope.security = Security;
         $scope.errorService = ErrorService;
 
@@ -25,7 +26,16 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
             $scope.todo.content = '';
         };
 
-        $scope.deleteItem = function () {
+		$scope.newTodo = function () {
+            $scope.todo.userId = Security.currentUser.email;
+			Todo.save({}, $scope.todo, function (res) {
+				$scope.todo.content = '';
+                getTodo();
+			});
+		};
+
+		$scope.deleteItem = function () {
+
             var id = this.todo._id;
             TodoList.delete({ id: id }, function (res) {
                 $scope.err = JSON.stringify(res.err);
@@ -33,11 +43,13 @@ controllers.controller('todoCtrl', function ($scope, $rootScope, $location, $htt
             });
         };
 
-        getTodo = function () {
+        var getTodo = function () {
             var userId = Security.currentUser.email;
             $scope.todos = TodoList.get();
-        };
+        }
         getTodo();
+
+        this.message = 10;
 
     }
 );

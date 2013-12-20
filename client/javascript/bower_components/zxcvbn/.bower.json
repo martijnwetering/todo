@@ -1,0 +1,14 @@
+{
+  "name": "zxcvbn",
+  "homepage": "https://github.com/lowe/zxcvbn",
+  "_release": "cae15350c2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "cae15350c2ea137d9f2a4e9e87618717f9dfe728"
+  },
+  "_source": "git://github.com/lowe/zxcvbn.git",
+  "_target": "*",
+  "_originalSource": "zxcvbn",
+  "_direct": true
+}
